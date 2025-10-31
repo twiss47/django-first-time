@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ person.full_name }} — Profile</title>
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(135deg, #eef4ff, #d9e8ff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .card {
+            background-color: #fff;
+            width: 400px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            text-align: center;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .card h2 {
+            margin: 15px 0 5px 0;
+            color: #003366;
+        }
+
+        .card p {
+            color: #333;
+            margin: 5px 0;
+            font-size: 16px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background-color: #0047ab;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background-color: #00307d;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        {% if person.image %}
+            <img src="{{ person.image.url }}" alt="{{ person.full_name }}">
+        {% else %}
+            <img src="https://via.placeholder.com/400x300?text=No+Image" alt="No photo">
+        {% endif %}
+
+        <h2>{{ person.full_name }}</h2>
+        <p><strong>Age:</strong> {{ person.age }}</p>
+        <p><strong>Email:</strong> {{ person.email }}</p>
+
+        <a href="{% url 'home' %}" class="back-btn">⬅ Back to List</a>
+    </div>
+</body>
+</html>

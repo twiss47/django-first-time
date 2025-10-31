@@ -1,30 +1,10 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-
-# Create your views here.
+from django.shortcuts import render, get_object_or_404
+from .models import Person
 
 def home(request):
-    return HttpResponse('hello from home')
+    people = Person.objects.all()
+    return render(request, 'index.html', {'people': people})
 
-
-def check_age(request, age):
-    if age >= 18:
-        return HttpResponse('older ')
-    
-    else:
-        return HttpResponse('young')
-
-
-def region(request,region):
-    uzbekistan = ("Toshkent", "Toshkent viloyati", "Andijon", "Fargona", "Namangan",
-    "Sirdaryo", "Jizzax", "Samarqand", "Qashqadaryo", "Surxondaryo",
-    "Navoiy", "Buxoro", "Xorazm", "Qoraqalpogiston Respublikasi")
-    
-    if region in uzbekistan:
-        return HttpResponse(f' {region} in Uzbekistan')
-    
-    else:
-        return HttpResponse(f' {region} is not in Uzbekistan')
-    
-
-
+def person_detail(request, id):
+    person = get_object_or_404(Person, id=id)
+    return render(request, 'detail.html', {'person': person})

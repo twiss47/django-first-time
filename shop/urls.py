@@ -1,9 +1,7 @@
 from django.urls import path
-from shop.views import home, check_age, region
+from .views import home, person_detail
 
 urlpatterns = [
-    path('home/', home, name='home'),
-    path('check_age/<int:age>/', check_age, name='check_age'),
-    path('region/<str:region>/', region, name='region'),
-
+    path('person/', home, name='home'),  
+    path('person/<int:id>/', person_detail, name='person_detail'),
 ]

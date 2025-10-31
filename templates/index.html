@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>People Directory</title>
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(135deg, #f7faff, #eaf1ff);
+            padding: 40px;
+        }
+        h1 {
+            text-align: center;
+            color: #003366;
+            margin-bottom: 40px;
+        }
+        table {
+            width: 90%;
+            margin: auto;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        th, td {
+            padding: 15px;
+            text-align: center;
+        }
+        th {
+            background: #0047ab;
+            color: white;
+            text-transform: uppercase;
+        }
+        tr:nth-child(even) {
+            background-color: #f5f9ff;
+        }
+        tr:hover {
+            background-color: #d9e6ff;
+        }
+        img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        a {
+            color: #0047ab;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .menu {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .menu a {
+            margin: 0 10px;
+            padding: 8px 15px;
+            background-color: #0047ab;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+        .menu a:hover {
+            background-color: #002e7d;
+        }
+    </style>
+</head>
+<body>
+    <div class="menu">
+        <a href="{% url 'home' %}">Home</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </div>
+
+    <h1>👥 People Directory</h1>
+    <table>
+        <tr>
+            <th>Photo</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Age</th>
+        </tr>
+
+        {% for person in people %}
+        <tr>
+            <td>
+                {% if person.image %}
+                    <img src="{{ person.image.url }}" alt="{{ person.full_name }}">
+                {% else %}
+                    <img src="https://via.placeholder.com/70" alt="No photo">
+                {% endif %}
+            </td>
+            <td><a href="{% url 'person_detail' person.id %}">{{ person.full_name }}</a></td>
+            <td>{{ person.email }}</td>
+            <td>{{ person.age }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
